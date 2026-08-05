@@ -49,7 +49,7 @@
 <body>
 <main>
   <h1>GroceryScouter Privacy Policy</h1>
-  <p class="updated">Last updated: July 10, 2026</p>
+  <p class="updated">Last updated: August 4, 2026</p>
 
   <h2>1. Introduction</h2>
   <p>GroceryScouter (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is a community-sourced grocery price comparison app. This Privacy Policy explains what information we collect, how we use it, what we may do with anonymized price data, and your rights. By using GroceryScouter you agree to this policy.</p>
@@ -61,11 +61,12 @@
     <li>Display name (used within the app, never shown to other users)</li>
     <li>Price scan data: item name, brand, price, store, size, unit type, category, and scan date &mdash; contributed voluntarily when you scan a price tag</li>
     <li>Shopping list contents and price alert preferences</li>
+    <li>Store and loyalty program memberships &mdash; the programs you tell us you belong to (Settings &rarr; My memberships), such as a warehouse club or a supermarket loyalty card. We store the list of program names on your profile and use it to decide which member-only prices apply to you. We never ask for and never store membership numbers, card numbers, or store account credentials. This list is deleted when you delete your account.</li>
   </ul>
   <p>Information collected automatically:</p>
   <ul>
-    <li>Device location (GPS) &mdash; used only to suggest nearby stores at the moment of a scan. Never stored as history. Discarded after each session.</li>
-    <li>Crash and error data (via Sentry) &mdash; device type, OS version, stack traces only. Never includes price data or personal information.</li>
+    <li>Device location (GPS) &mdash; used to suggest nearby stores and to filter stores and prices by distance. Your location is not stored as history and is discarded after each session. One exception, and it is deliberate: if you add a new store to the community directory, the coordinates you are standing at are saved as that store&rsquo;s public location &mdash; that is what places the pin on the map for everyone. Your name is not attached to it, but the coordinate itself is public and permanent.</li>
+    <li>Crash and error data (via Sentry) &mdash; device type, OS version, and stack traces. Before a crash report leaves your device we remove your email address, username, and IP address; we discard the app&rsquo;s internal log entries entirely, because those can mention item names and prices; and we strip the query portion of network request URLs, because those can contain record identifiers and map coordinates. Crash reports are not used to build your profile or price history.</li>
   </ul>
   <p>Information collected with your explicit consent (off by default):</p>
   <ul>
@@ -99,16 +100,20 @@
     <li>RevenueCat: manages subscription purchases and entitlements</li>
     <li>Sentry: crash reporting and error monitoring</li>
     <li>PostHog: aggregate usage analytics (active &mdash; tracks aggregate usage only, no personal information)</li>
+    <li>OpenStreetMap: the nearby-stores map draws its map images from OpenStreetMap&rsquo;s tile servers. Your device requests those images directly, so OpenStreetMap receives your IP address and the map area you are viewing &mdash; which is roughly where you are. This happens only while the map is on screen.</li>
+    <li>Expo (push notifications): if you enable price alerts, your device registers with Expo&rsquo;s push notification service, which issues a push token identifying your device installation. Expo holds that token and relays our alert messages to your device.</li>
+    <li>GitHub (GitHub Pages): our email verification and password reset links point to a page we host on GitHub Pages (emanuels789.github.io). When you tap one of those links, your browser contacts GitHub, which receives your IP address and the page you requested.</li>
   </ul>
   <p>All providers are bound by their own privacy policies and applicable law.</p>
 
   <h2>6. Community Price Data</h2>
   <p>Price records you contribute are visible to other users as: price, store, date, and item &mdash; never your name or account. If you delete your account, your contributions remain in the database permanently anonymized. Your identity is removed and cannot be recovered.</p>
+  <p>The same applies to stores and items you add: a store you create becomes part of the shared directory, including the coordinates you were at when you added it, and every user can see that pin on the map. It is not labelled with your name or account.</p>
 
   <h2>7. Your Rights and Choices</h2>
   <ul>
     <li>Export your data: available any time in Settings &rarr; Export My Data. Downloads all your price scans and profile data as CSV or JSON.</li>
-    <li>Delete your account: available in Settings &rarr; Delete Account. Deletes your profile and all personal information. Price contributions are retained anonymously.</li>
+    <li>Delete your account: available in Settings &rarr; Delete Account. Your profile, email address, display name, memberships, saved stores, shopping lists, price alerts, verifications, flags, and any scan images are deleted. Community content is kept, but severed from you in one of two ways: your price records stay in the database with the contributor field emptied, while the items, stores, and item size-links you created are transferred to an anonymous &ldquo;deleted user&rdquo; placeholder so the shared data other people rely on keeps working. Neither route can be traced back to you.</li>
     <li>Withdraw consent: toggle scan image contribution at any time in Settings.</li>
     <li>California residents (CCPA): you have the right to know what personal information we collect and request its deletion. Anonymized price data (item + price + store + date + region, no user identifiers) does not constitute personal information under CCPA. For all other rights or requests, contact <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>.</li>
   </ul>
