@@ -49,7 +49,7 @@
 <body>
 <main>
   <h1>GroceryScouter Privacy Policy</h1>
-  <p class="updated">Last updated: August 4, 2026</p>
+  <p class="updated">Last updated: August 5, 2026</p>
 
   <h2>1. Introduction</h2>
   <p>GroceryScouter (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is a community-sourced grocery price comparison app. This Privacy Policy explains what information we collect, how we use it, what we may do with anonymized price data, and your rights. By using GroceryScouter you agree to this policy.</p>
@@ -68,9 +68,9 @@
     <li>Device location (GPS) &mdash; used to suggest nearby stores and to filter stores and prices by distance. Your location is not stored as history and is discarded after each session. One exception, and it is deliberate: if you add a new store to the community directory, the coordinates you are standing at are saved as that store&rsquo;s public location &mdash; that is what places the pin on the map for everyone. Your name is not attached to it, but the coordinate itself is public and permanent.</li>
     <li>Crash and error data (via Sentry) &mdash; device type, OS version, and stack traces. Before a crash report leaves your device we remove your email address, username, and IP address; we discard the app&rsquo;s internal log entries entirely, because those can mention item names and prices; and we strip the query portion of network request URLs, because those can contain record identifiers and map coordinates. Crash reports are not used to build your profile or price history.</li>
   </ul>
-  <p>Information collected with your explicit consent (off by default):</p>
+  <p>Price tag photos:</p>
   <ul>
-    <li>Scan images &mdash; only if you enable &ldquo;Contribute scan images&rdquo; in Settings. Images are stripped of all metadata, including GPS coordinates, before any processing or storage. You can withdraw this consent at any time.</li>
+    <li>When you scan a price tag, the photo is transmitted to our processing service so the price can be read off the tag. The photo is not retained &mdash; neither by us nor, under the paid Gemini API tier we use, by Google for product improvement. We do not store scan images, and there is no option to contribute them. Only the extracted text &mdash; item name, brand, price, size &mdash; is saved.</li>
   </ul>
 
   <h2>3. How We Use Your Information</h2>
@@ -93,8 +93,8 @@
   <h2>5. Information We Share With Service Providers</h2>
   <p>We share data only with providers necessary to operate the app:</p>
   <ul>
-    <li>Supabase: database, authentication, and file storage (USA)</li>
-    <li>Google (Gemini): processes price tag images at the moment of a scan to extract price data. Images are sent through our own server proxy &mdash; never directly from your device &mdash; and are not used to identify you.</li>
+    <li>Supabase: database and authentication (USA)</li>
+    <li>Google (Gemini): processes price tag images at the moment of a scan to extract price data. Images are sent through our own server proxy &mdash; never directly from your device &mdash; and are not used to identify you. We use the paid Gemini API tier, under which Google does not retain the image or use it to improve their products; the image exists only for the moment it takes to read the price.</li>
     <li>Open Food Facts: when you scan a product barcode, we send the barcode number only to look up product information. No account identity is attached.</li>
     <li>Google AdMob: serves ads to free-tier users only</li>
     <li>RevenueCat: manages subscription purchases and entitlements</li>
@@ -113,8 +113,8 @@
   <h2>7. Your Rights and Choices</h2>
   <ul>
     <li>Export your data: available any time in Settings &rarr; Export My Data. Downloads all your price scans and profile data as CSV or JSON.</li>
-    <li>Delete your account: available in Settings &rarr; Delete Account. Your profile, email address, display name, memberships, saved stores, shopping lists, price alerts, verifications, flags, and any scan images are deleted. Community content is kept, but severed from you in one of two ways: your price records stay in the database with the contributor field emptied, while the items, stores, and item size-links you created are transferred to an anonymous &ldquo;deleted user&rdquo; placeholder so the shared data other people rely on keeps working. Neither route can be traced back to you.</li>
-    <li>Withdraw consent: toggle scan image contribution at any time in Settings.</li>
+    <li>Delete your account: available in Settings &rarr; Delete Account. Your profile, email address, display name, memberships, saved stores, shopping lists, price alerts, verifications, and flags are deleted. Community content is kept, but severed from you in one of two ways: your price records stay in the database with the contributor field emptied, while the items, stores, and item size-links you created are transferred to an anonymous &ldquo;deleted user&rdquo; placeholder so the shared data other people rely on keeps working. Neither route can be traced back to you.</li>
+    <li>Withdraw consent: change your privacy choices, including ad personalization, at any time in Settings.</li>
     <li>California residents (CCPA): you have the right to know what personal information we collect and request its deletion. Anonymized price data (item + price + store + date + region, no user identifiers) does not constitute personal information under CCPA. For all other rights or requests, contact <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>.</li>
   </ul>
 
@@ -123,7 +123,7 @@
     <li>Account and profile data: retained until you delete your account</li>
     <li>Price scan data: retained indefinitely in anonymized form after deletion</li>
     <li>Consent log: retained for legal compliance</li>
-    <li>Scan images (if enabled): deleted when you delete your account or withdraw consent</li>
+    <li>Scan images: never stored &mdash; the photo is discarded once the price has been read from it</li>
     <li>Crash reports: per Sentry&rsquo;s standard retention policy</li>
   </ul>
 
