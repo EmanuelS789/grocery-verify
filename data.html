@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GroceryScouter Data Sources</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #F7F3EA;
+    color: #241f18;
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-text-size-adjust: 100%;
+  }
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.25;
+    margin: 0 0 4px;
+    border-bottom: 2px solid #241f18;
+    padding-bottom: 12px;
+  }
+  .updated {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    color: #5C574E;
+    margin: 12px 0 32px;
+  }
+  h2 {
+    font-size: 19px;
+    margin: 36px 0 8px;
+    border-top: 1px solid #e6ddcb;
+    padding-top: 20px;
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  a { color: #241f18; }
+  .placeholder {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #5C574E;
+    border: 1px dashed #b8ad97;
+    padding: 10px 12px;
+    margin: 0 0 14px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>GroceryScouter Data Sources</h1>
+  <p class="updated">Last updated: September 11, 2026</p>
+
+  <h2>1. Open Food Facts (ODbL)</h2>
+  <p>Some product names, brands, categories and package sizes shown in GroceryScouter come from <a href="https://world.openfoodfacts.org">Open Food Facts</a>, the open food products database. That data is made available under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License (ODbL) v1.0</a>. Open Food Facts is not affiliated with GroceryScouter and does not endorse it.</p>
+  <p>Where a product&rsquo;s details came from Open Food Facts, the app shows a &ldquo;Product details from Open Food Facts&rdquo; link on that product&rsquo;s page that opens the matching Open Food Facts product page.</p>
+
+  <h2>2. What we derive, and under which licence</h2>
+  <p>The product-identity records we build from Open Food Facts data (names, brands, categories and sizes, keyed by barcode), together with any corrections our users make to them, form a database derived from Open Food Facts. We make that derived part available under the same Open Database License, as the licence requires.</p>
+  <p>Everything else in GroceryScouter &mdash; prices, price history, stores, user accounts, shopping lists, price alerts and the app&rsquo;s own code &mdash; is our own or our users&rsquo; work and is <strong>not</strong> derived from Open Food Facts. It is not covered by this notice.</p>
+
+  <h2>3. Cleaning scripts and corrections</h2>
+  <p>Our cleaning scripts and a corrections CSV will be published on this page. They are periodically updated, and they are also available on request at <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>. The corrections export carries product facts only &mdash; barcode, name, brand, category and size &mdash; and never any user identifier or per-user timestamp.</p>
+  <ul>
+    <li><strong>Cleaning scripts</strong> &mdash; <span class="placeholder">Coming with the Open Food Facts bulk import. Will link to the scripts in the GroceryScouter repository.</span></li>
+    <li><strong>Corrections CSV</strong> &mdash; <span class="placeholder">Coming with the Open Food Facts bulk import. Will link to the latest export and state its export date.</span></li>
+  </ul>
+
+  <h2>4. USDA Global Branded Food Products Database (CC0)</h2>
+  <p class="placeholder">Coming later: GroceryScouter plans to fill in products that Open Food Facts does not know from the USDA FoodData Central Global Branded Food Products Database, which is released into the public domain (CC0). That data carries no licence obligations, is kept separate from the Open Food Facts data, and will be described here once it is in use.</p>
+
+  <h2>5. OpenStreetMap</h2>
+  <p>The nearby-stores map is drawn with <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> map tiles. Map data &copy; OpenStreetMap contributors, available under the Open Database License. If something on the map is wrong, you can <a href="https://www.openstreetmap.org/fixthemap">report a map issue</a> to OpenStreetMap directly.</p>
+
+  <h2>6. Contact</h2>
+  <p>Questions about our use of open data, or a request for a copy of the derived data: <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>.</p>
+</main>
+</body>
+</html>
