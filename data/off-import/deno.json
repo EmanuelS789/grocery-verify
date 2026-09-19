@@ -1,0 +1,23 @@
+{
+  "//": [
+    "Deno config for the data-import cleaners (data-source arc phase 2, 2026-09-16).",
+    "WHY DENO: standing decision #7 says the cleaners import the app's OWN barcode",
+    "classifier, size grammar and category mapper. The size grammar lives in the",
+    "Deno proxy (supabase/functions/off-proxy/handler.ts) and the src/ modules use",
+    "the @/ alias plus extensionless relative imports; Deno with this import map",
+    "and sloppy imports loads all of them unmodified (proven 2026-09-15). The app's",
+    "tsconfig EXCLUDES scripts/data-import/** (like supabase/functions/**) — Deno",
+    "type-checks these files, tsc never sees Deno globals.",
+    "lock: false — no remote dependency beyond the std asserts the Deno tests share",
+    "with supabase/functions, so no lockfile is written beside this config."
+  ],
+  "imports": {
+    "@/": "../../src/"
+  },
+  "unstable": ["sloppy-imports"],
+  "lock": false,
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true
+  }
+}

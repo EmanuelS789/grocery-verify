@@ -57,7 +57,7 @@
 <body>
 <main>
   <h1>GroceryScouter Data Sources</h1>
-  <p class="updated">Last updated: September 11, 2026</p>
+  <p class="updated">Last updated: September 20, 2026</p>
 
   <h2>1. Open Food Facts (ODbL)</h2>
   <p>Some product names, brands, categories and package sizes shown in GroceryScouter come from <a href="https://world.openfoodfacts.org">Open Food Facts</a>, the open food products database. That data is made available under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License (ODbL) v1.0</a>. Open Food Facts is not affiliated with GroceryScouter and does not endorse it.</p>
@@ -68,10 +68,10 @@
   <p>Everything else in GroceryScouter &mdash; prices, price history, stores, user accounts, shopping lists, price alerts and the app&rsquo;s own code &mdash; is our own or our users&rsquo; work and is <strong>not</strong> derived from Open Food Facts. It is not covered by this notice.</p>
 
   <h2>3. Cleaning scripts and corrections</h2>
-  <p>Our cleaning scripts and a corrections CSV will be published on this page. They are periodically updated, and they are also available on request at <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>. The corrections export carries product facts only &mdash; barcode, name, brand, category and size &mdash; and never any user identifier or per-user timestamp.</p>
+  <p>Our cleaning scripts and a corrections CSV are published on this page. They are periodically updated, and they are also available on request at <a href="mailto:groceryscoutersupport@gmail.com">groceryscoutersupport@gmail.com</a>. The corrections export carries product facts only &mdash; barcode, name, brand, category and size &mdash; and never any user identifier or per-user timestamp.</p>
   <ul>
-    <li><strong>Cleaning scripts</strong> &mdash; <span class="placeholder">Coming with the Open Food Facts bulk import. Will link to the scripts in the GroceryScouter repository.</span></li>
-    <li><strong>Corrections CSV</strong> &mdash; <span class="placeholder">Coming with the Open Food Facts bulk import. Will link to the latest export and state its export date.</span></li>
+    <li><strong>Cleaning scripts</strong> &mdash; <a href="data/off-import/README.md">README.md</a> (what is kept, what is dropped, and the run order), <a href="data/off-import/extract.py">extract.py</a> (the Open Food Facts Parquet export &rarr; JSONL), <a href="data/off-import/clean.ts">clean.ts</a> with <a href="data/off-import/normalize.ts">normalize.ts</a> and <a href="data/off-import/jsonl.ts">jsonl.ts</a> (JSONL &rarr; the load file), <a href="data/off-import/probe.py">probe.py</a> (the survey of the export that chose the filters) and <a href="data/off-import/deno.json">deno.json</a>. The scripts call the app&rsquo;s own barcode normaliser, package-size grammar and category mapper, which are part of the app&rsquo;s source rather than of this page; that source is available on request. The current load is described in <a href="data/off-import/report.md">report.md</a>: the Open Food Facts Parquet export of September 15, 2026 &mdash; 1,315,018 rows read, 1,085,050 kept.</li>
+    <li><strong>Corrections CSV</strong> &mdash; <span class="placeholder">The corrections export follows the first production load.</span> A row will be a product whose details as stored in GroceryScouter differ from the current Open Food Facts record: the barcode, then the stored and the Open Food Facts name, brand, category (as mapped by our category rules) and package size, side by side.</li>
   </ul>
 
   <h2>4. USDA Global Branded Food Products Database (CC0)</h2>
