@@ -1,0 +1,75 @@
+owner
+# scripts/data-import/usda/usda_retailer_owners.csv — the retailer-OWNER list
+# behind ref_products_usda.is_store_brand (phase-3 gate-1 pick, 2026-09-20).
+# One retailer string per row; the cleaner flags a row when brand_owner
+# CONTAINS the string (case-insensitive), OR'd with the app's own
+# classifyStoreBrand(name, brand). RETAILERS ONLY: a wholesaler cooperative
+# whose labels sell across unrelated retailers (Topco / Food Club, Supervalu /
+# Essential Everyday, Associated Wholesale Grocers / Best Choice,
+# SpartanNash) is deliberately ABSENT — the knownStoreBrands.ts MAINTENANCE
+# rule: only brands exclusive to one chain or one parent's banners. Strings
+# are chosen to be longer than a common word so a manufacturer name cannot
+# match by accident (the 2026-09-09 census caught "Shaw" in "Shawnee Mills"
+# and "Amazon" in "Amazonas Imports" — both left out or narrowed). Eman
+# edits this file; a change is a re-clean + UPDATE, never a schema change.
+# 2026-09-20 (gate 3, Eman): Wakefern INCLUDED — a single-banner retailer to
+# shoppers (ShopRite / Price Rite / The Fresh Grocer are its own stores); the
+# wholesaler exclusion targets MULTI-banner suppliers such as Topco.
+Wegmans
+Market Basket
+DeMoulas
+Hannaford
+Ahold
+Stop & Shop
+Giant Food
+Albertsons
+Safeway
+Trader Joe
+Aldi Inc
+Wal-Mart
+Walmart
+Target Stores
+Target Corporation
+Costco
+Whole Foods Market
+BJ's Wholesale
+Kroger
+Meijer
+Hy-Vee
+Giant Eagle
+Harris-Teeter
+Harris Teeter
+Weis Markets
+Schnuck
+Raley's
+Tops Markets
+Smart & Final
+Publix
+H-E-B
+HEB Grocery
+Dollar General
+Walgreen
+CVS Pharmacy
+Sprouts Farmers
+Lidl
+Food Lion
+Winco
+Save Mart
+Price Chopper
+Big Y
+ShopRite
+The Fresh Market
+Southeastern Grocers
+Wakefern
+Stater Bros
+Piggly Wiggly
+Heinen's
+Lunds
+Festival Foods
+Ingles Markets
+Brookshire
+Fareway
+Fred Meyer
+Sam's Club
+Sam's West
+Amazon Fulfillment Services

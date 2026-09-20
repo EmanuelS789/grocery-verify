@@ -57,7 +57,7 @@
 <body>
 <main>
   <h1>GroceryScouter Data Sources</h1>
-  <p class="updated">Last updated: September 20, 2026</p>
+  <p class="updated">Last updated: September 21, 2026</p>
 
   <h2>1. Open Food Facts (ODbL)</h2>
   <p>Some product names, brands, categories and package sizes shown in GroceryScouter come from <a href="https://world.openfoodfacts.org">Open Food Facts</a>, the open food products database. That data is made available under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License (ODbL) v1.0</a>. Open Food Facts is not affiliated with GroceryScouter and does not endorse it.</p>
@@ -75,7 +75,11 @@
   </ul>
 
   <h2>4. USDA Global Branded Food Products Database (CC0)</h2>
-  <p class="placeholder">Coming later: GroceryScouter plans to fill in products that Open Food Facts does not know from the USDA FoodData Central Global Branded Food Products Database, which is released into the public domain (CC0). That data carries no licence obligations, is kept separate from the Open Food Facts data, and will be described here once it is in use.</p>
+  <p>When Open Food Facts does not know a barcode, GroceryScouter next checks a second, smaller reference table built from the USDA FoodData Central <em>Branded Foods</em> release (the Global Branded Food Products Database), which USDA publishes into the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. CC0 carries no licence obligations &mdash; no attribution is required &mdash; and the app shows a one-line courtesy notice in Settings &rsaquo; Legal. The USDA data is kept in its own table, separate from the Open Food Facts data, and the two are never merged or written into each other. Products identified from it are marked as such internally and carry no Open Food Facts link.</p>
+  <ul>
+    <li><strong>Cleaning scripts</strong> &mdash; <a href="data/usda-import/README.md">README.md</a> (what is kept, what is dropped, and the run order), <a href="data/usda-import/extract.py">extract.py</a> (the USDA CSV release &rarr; JSONL), <a href="data/usda-import/clean.ts">clean.ts</a> with <a href="data/usda-import/normalize.ts">normalize.ts</a> (JSONL &rarr; the load file; they share the JSONL reader, CSV encoder and dedupe published under <a href="data/off-import/">off-import/</a>), <a href="data/usda-import/probe.py">probe.py</a> with <a href="data/usda-import/probe_rules.ts">probe_rules.ts</a> (the survey of the release that chose the filters), and the two reviewed inputs the cleaner reads: <a href="data/usda-import/usda_category_map.csv">usda_category_map.csv</a> (USDA category &rarr; our category) and <a href="data/usda-import/usda_retailer_owners.csv">usda_retailer_owners.csv</a> (the retailer-owner list behind the store-brand flag). As with the Open Food Facts scripts, the app&rsquo;s own barcode normaliser, package-size grammar and store-brand list are part of the app&rsquo;s source, available on request. The current load is described in <a href="data/usda-import/report.md">report.md</a>: the FoodData Central Branded Foods release of April 30, 2026 &mdash; 463,923 US-market rows read, 425,222 kept.</li>
+    <li><strong>No corrections export</strong> &mdash; CC0 asks for none, and none is produced.</li>
+  </ul>
 
   <h2>5. OpenStreetMap</h2>
   <p>The nearby-stores map is drawn with <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> map tiles. Map data &copy; OpenStreetMap contributors, available under the Open Database License. If something on the map is wrong, you can <a href="https://www.openstreetmap.org/fixthemap">report a map issue</a> to OpenStreetMap directly.</p>
