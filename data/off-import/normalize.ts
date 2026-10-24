@@ -15,8 +15,10 @@
  *              shaped like an API product object. A local row is therefore
  *              byte-for-byte what the live path would have produced for that
  *              product: first brand of `brands`, en: tags preferred, the
- *              strict unit allowlist, multipacks skipped, serving-size echo
- *              suppressed, is_organic only on en:usda-organic.
+ *              strict unit allowlist on the FIRST slash token of the label
+ *              (2026-09-27), multipacks skipped, serving-size echo
+ *              suppressed, embedded whitespace in the name collapsed
+ *              (2026-09-27), is_organic only on en:usda-organic.
  *            - category_id: mapOffCategoriesToCanonical
  *              (src/modules/barcode/offCategoryMapper.ts) → canonical name →
  *              the environment's item_categories id (ids are

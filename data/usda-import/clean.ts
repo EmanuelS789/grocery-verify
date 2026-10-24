@@ -304,7 +304,7 @@ async function main(): Promise<void> {
       ['brand / owner dropped (over 500 chars)', fmt(brandDropped), pct(brandDropped, rowsOut)],
       ['name title-cased (source was all-caps)', fmt(titleCased), pct(titleCased, rowsOut)],
       ['size parsed (first `package_weight` token through the app grammar)', fmt(sizeParsed), pct(sizeParsed, rowsOut)],
-      ['package_weight present but no size (spelling noise: `ONZ`, `0Z`, `LBR`, fractions, multipacks)', fmt(weightUnparsed), pct(weightUnparsed, rowsOut)],
+      ['package_weight present but no size (spelling noise: `0Z`, `OZS`, `QTS`, fractions, multipacks — the Rec. 20 codes `ONZ` / `LBR` / `OZA` read since 2026-10-24)', fmt(weightUnparsed), pct(weightUnparsed, rowsOut)],
       ['usda_category present', fmt(hadCategory), pct(hadCategory, rowsOut)],
       ['**category mapped to a canonical name (map hit)**', `**${fmt(categoryMapped)}**`, `${pct(categoryMapped, rowsOut)} of rows out · ${pct(categoryMapped, hadCategory)} of rows with a category`],
       ['category_id resolved through the id map', fmt(categoryIdResolved), pct(categoryIdResolved, categoryMapped)],

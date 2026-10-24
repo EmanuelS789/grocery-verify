@@ -48,17 +48,17 @@ Size is never a reject: an unparsed label leaves the size pair NULL and the user
 | …brand_name was a placeholder literal (`N/A` / `NA`) | 350 | 0.1% |
 | brand / owner dropped (over 500 chars) | 0 | 0.0% |
 | name title-cased (source was all-caps) | 406,614 | 95.6% |
-| size parsed (first `package_weight` token through the app grammar) | 358,422 | 84.3% |
-| package_weight present but no size (spelling noise: `ONZ`, `0Z`, `LBR`, fractions, multipacks) | 17,103 | 4.0% |
+| size parsed (first `package_weight` token through the app grammar) | 372,756 | 87.7% |
+| package_weight present but no size (spelling noise: `0Z`, `OZS`, `QTS`, fractions, multipacks — the Rec. 20 codes `ONZ` / `LBR` / `OZA` read since 2026-10-24) | 2,769 | 0.7% |
 | usda_category present | 425,069 | 100.0% |
 | **category mapped to a canonical name (map hit)** | **425,067** | 100.0% of rows out · 100.0% of rows with a category |
 | category_id resolved through the id map | 425,067 | 100.0% |
-| **is_store_brand = true** | **88,224** | 20.7% |
-| …by the app's `classifyStoreBrand` (name + brand) | 42,733 | 10.0% |
+| **is_store_brand = true** | **88,276** | 20.8% |
+| …by the app's `classifyStoreBrand` (name + brand) | 44,588 | 10.5% |
 | …by the owner list (`brand_owner` contains a retailer string) | 83,238 | 19.6% |
-| …by the owner list ONLY (the classifier gap the flag closes) | 45,491 | 10.7% |
+| …by the owner list ONLY (the classifier gap the flag closes) | 43,688 | 10.3% |
 
-Units produced by the size parse: `oz` 275,164, `fl oz` 50,157, `lb` 8,839, `g` 8,751, `qt` 4,156, `gal` 3,322, `pt` 2,986, `ml` 2,154, `L` 1,751, `kg` 1,142.
+Units produced by the size parse: `oz` 284,746, `fl oz` 51,681, `lb` 11,447, `g` 8,857, `qt` 4,168, `gal` 3,381, `pt` 2,986, `ml` 2,266, `L` 1,897, `kg` 1,147, `ct` 180.
 
 ## 5. Mapped canonical categories
 

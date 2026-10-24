@@ -7,6 +7,16 @@ the app's public notice is <https://emanuels789.github.io/grocery-verify/data.ht
 This folder is published there as the "cleaning scripts" the licence asks us to
 offer, together with each load's `report.md`.
 
+**Republished 2026-10-24** (from commit `7d5c5b7b`, the PR #55 merge): the package-size
+grammar these scripts import — `parseOffSize` in `supabase/functions/off-proxy/handler.ts`,
+outside this folder — gained the count spellings (`pcs` / `pc` / `piece(s)` / `unit(s)` /
+`ct` / `count` / `ea` / `each` / `stuk(s)` → the `ct` display unit, the weakest size), the
+`fl.oz` spelling and the UN/CEFACT Rec. 20 unit codes (`ONZ` `LBR` `OZA` `LTR` `MLT` `GRM`
+`GLL` `KGM` `QTL` `H87`) on 2026-10-24, so the cleaner published here (unchanged since the
+2026-09-19 publish apart from `normalize.ts`'s header comment) now fills sizes the
+September 15 load left empty; the loaded rows were brought up to date in place by
+`size_count_updates.ts` (below), never a reload.
+
 Nothing here talks to the network. The Parquet download, the database load and
 the swap are run by hand, outside these scripts.
 
@@ -79,3 +89,63 @@ deno test --config scripts/data-import/deno.json scripts/data-import/
 
 (also the second half of `npm run test:deno`). The tests use bracketed
 placeholder names, never real products.
+
+## size_updates.ts (2026-09-27 — SMALL CLEANUPS 1, DEV UPDATE queue)
+
+Not part of the load. When the size grammar changed (the first slash-separated
+token of the label now wins — `8 oz/227 g` → 8 oz), the loaded rows kept their
+old sizes. `size_updates.ts` re-runs the cleaner's own row function over
+`out/off_us.jsonl` and writes `out/size_updates.csv` (`barcode,size_value,size_unit`)
+for the slash-label rows only; the queue in PROGRESS.md `\copy`s it into a
+TEMPORARY table and joins it in one UPDATE. Never a reload (standing decision #12).
+
+```
+deno run --no-lock --config scripts/data-import/deno.json --allow-read=scripts/data-import/off/out --allow-write=scripts/data-import/off/out scripts/data-import/off/size_updates.ts
+```
+
+## category_updates.ts (2026-10-08 — PRODUCT TRIO, DEV RE-MAP queue)
+
+Not part of the load. When the category mapper gained its second alias batch
+(the Snacks & Chips misroute — chocolate, candy, biscuits and crackers filed
+under Snacks because OFF lists `en:snacks` first — plus the NULL tags of the
+2026-10-08 DEV coverage audit), the loaded rows kept the categories they were
+loaded with. `category_updates.ts` re-runs the cleaner's own row function over
+`out/off_us.jsonl` and writes `out/category_updates.csv` (`barcode,category_name`)
+for every row that maps today — the canonical NAME, never a uuid, because the
+category-id map is per environment (above). The queue in PROGRESS.md `\copy`s
+it into a TEMPORARY table, joins `item_categories` by name and applies the
+UPDATE in batches of 10,000 with a `pg_database_size` read-back between
+batches (`IS DISTINCT FROM` skips rows whose category already matches). Rows
+that map to nothing are not emitted — the UPDATE never writes a NULL. Never a
+reload (standing decision #12).
+
+```
+deno run --no-lock --config scripts/data-import/deno.json --allow-read=scripts/data-import/off/out --allow-write=scripts/data-import/off/out scripts/data-import/off/category_updates.ts
+```
+
+## size_count_updates.ts (2026-10-24 — OFF SIZE GRAMMAR, COUNT SPELLINGS, DEV RE-MAP queue)
+
+Not part of the load. When the size grammar learned the count spellings
+(`pcs` / `pieces` / `unit(s)` / `ct` / `count` / `ea` / `each` / `pc` / `stuk(s)` →
+the `ct` display unit) and the `fl.oz` spelling (→ `fl oz`), the loaded rows
+kept the NULL sizes they were loaded with — and, the same day, the UN/CEFACT
+Rec. 20 unit codes the USDA release writes (`ONZ` `LBR` `OZA` `LTR` `MLT` `GRM`
+`GLL` `KGM` `QTL` `H87`; `CLT` excluded — the app has no `cl` unit).
+`size_count_updates.ts` is ONE
+script for BOTH reference tables — `--source off` re-runs this cleaner's row
+function over `out/off_us.jsonl`, `--source usda` the USDA cleaner's over
+`../usda/out/usda_us.jsonl` — and writes `size_count_updates.csv`
+(`barcode,size_value,size_unit`) beside the extract it read, for the rows whose
+new size the old grammar could not have produced (a count, or a first token
+spelling `fl.oz` or one of the Rec. 20 codes). Two passes: the first records the newest copy per canonical
+barcode over EVERY gated row (as the load did), the second emits the survivor.
+The queue in PROGRESS.md `\copy`s each CSV into a TEMPORARY table and applies
+the UPDATE in batches of 10,000 (`IS DISTINCT FROM` is the diff; nothing that
+fails to parse is emitted, so the UPDATE never writes a NULL). Never a reload
+(standing decision #12); there is no PROD half — PROD's tables are empty until
+launch day and that load runs this grammar.
+
+```
+deno run --no-lock --config scripts/data-import/deno.json --allow-read=scripts/data-import --allow-write=scripts/data-import scripts/data-import/off/size_count_updates.ts --source off
+deno run --no-lock --config scripts/data-import/deno.json --allow-read=scripts/data-import --allow-write=scripts/data-import scripts/data-import/off/size_count_updates.ts --source usda
+```

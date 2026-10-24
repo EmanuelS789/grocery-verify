@@ -18,9 +18,12 @@
  *              has no lowercase letter (97.3 % of rows) — the single casing
  *              rule; nothing else is polished;
  *            - size: the proxy's mapOffProduct (supabase/functions/off-proxy/
- *              handler.ts — the same size grammar the OFF cleaner runs) fed
- *              the FIRST slash-separated token of package_weight ("16 oz/454 g"
- *              → "16 oz"; the release writes dual-unit labels on 68 % of rows);
+ *              handler.ts — the same size grammar the OFF cleaner runs) over
+ *              package_weight; the grammar itself reads the FIRST slash-
+ *              separated token ("16 oz/454 g" → "16 oz"; the release writes
+ *              dual-unit labels on 68 % of rows) — since 2026-09-27 that
+ *              rule lives INSIDE parseOffSize, so this cleaner no longer
+ *              splits the label itself (SMALL CLEANUPS 1: one grammar);
  *            - category: usda_category_map.csv (COMMITTED; Eman-reviewed) →
  *              canonical name → the target environment's item_categories id
  *              (ids are gen_random_uuid() per project, so the id map is an
@@ -302,15 +305,17 @@ export function titleCaseIfAllCaps(text: string): { name: string; titleCased: bo
 
 /**
  * The app's size grammar (the proxy's mapOffProduct → parseOffSize) on the
- * FIRST slash-separated token of the label. The release writes
- * "<imperial>/<metric>" on most rows; the OFF grammar is whole-string and
- * would parse none of them (phase-3 §1a: 9.5 % vs 97.4 %).
+ * label. The release writes "<imperial>/<metric>" on most rows; until
+ * 2026-09-27 the OFF grammar was whole-string and would parse none of them
+ * (phase-3 §1a: 9.5 % vs 97.4 %), so this function split the label on '/'
+ * and passed the first token. SMALL CLEANUPS 1 moved the first-token rule
+ * INTO parseOffSize (the OFF proxy, the OFF cleaner and this cleaner now
+ * read a slashed label identically), so this is a DELEGATE: the name and
+ * the cases it proved stay, the split is gone.
  */
 export function parseSizeFirstToken(packageWeight: string | null): { value: number; unit: string } | null {
-  if (packageWeight === null) return null;
-  const first = (packageWeight.split('/')[0] ?? '').trim();
-  if (first === '') return null;
-  const mapped = mapOffProduct({ quantity: first });
+  if (packageWeight === null || packageWeight.trim() === '') return null;
+  const mapped = mapOffProduct({ quantity: packageWeight });
   return mapped.sizeValue !== undefined && mapped.sizeUnit !== undefined
     ? { value: mapped.sizeValue, unit: mapped.sizeUnit }
     : null;
